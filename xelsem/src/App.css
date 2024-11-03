@@ -1,38 +1,76 @@
+/* General styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #000;
+}
+
+/* Container for the entire app */
 .App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 1s ease-in-out; /* Smooth transition between images */
+}
+
+/* Header styles */
+header {
+  background-color: #282c34;
+  color: white;
+  padding: 1rem;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Main content styles */
+main {
+  flex: 1;
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for text readability */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
+/* Footer styles */
+footer {
   background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
+  text-align: center;
+  padding: 1rem;
 }
 
-.App-link {
+/* Link styles */
+a {
   color: #61dafb;
+  text-decoration: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+a:hover {
+  text-decoration: underline;
+  color:#780000;
+}
+
+/* Button styles */
+button {
+  background-color: #61dafb;
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #21a1f1;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+  main {
+    padding: 1rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  header, footer {
+    padding: 0.5rem;
   }
 }
