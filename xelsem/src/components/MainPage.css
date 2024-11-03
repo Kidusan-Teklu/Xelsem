@@ -1,0 +1,93 @@
+/* MainPage.css */
+
+/* Background image styling */
+.main-page {
+    background-image: url('./bg1.jfif'); 
+    background-position: center;
+    background-repeat: no-repeat; /* Prevents the background from repeating */
+    background-size: cover; /* Ensures the background image covers the entire container */
+    color: #fff;
+    padding: 50px;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Logo styling */
+.logo {
+    width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Heading styles */
+.main-page h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Paragraph styling */
+.main-page p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* Subheading styles */
+.main-page h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* List styles */
+.main-page ul {
+    list-style-type: none;
+    padding: 0;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.main-page ul li {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Quote styling */
+.main-page blockquote {
+    font-style: italic;
+    font-size: 1.5rem;
+    margin: 30px auto;
+    max-width: 600px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    border-left: 4px solid #ddd;
+    padding-left: 15px;
+    color: #ffd700;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .main-page h1 {
+        font-size: 2.5rem;
+    }
+
+    .main-page h2 {
+        font-size: 1.8rem;
+    }
+
+    .main-page p {
+        font-size: 1rem;
+    }
+
+    .main-page blockquote {
+        font-size: 1.2rem;
+    }
+}

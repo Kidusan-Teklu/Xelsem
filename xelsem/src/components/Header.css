@@ -1,0 +1,22 @@
+/* src/components/Header.css */
+
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-logo {
+    width: 80px;
+    height: auto;
+}
+
+.header-title {
+    font-size: 2rem;
+}

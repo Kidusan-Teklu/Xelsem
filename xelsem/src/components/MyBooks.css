@@ -1,0 +1,91 @@
+/* src/components/MyBooks.css */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; /* Light background for contrast */
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+}
+
+h3 {
+    margin-top: 20px;
+    color: #555;
+}
+
+button {
+    cursor: pointer;
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"],
+input[type="file"] {
+    width: 80%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="text"]:focus,
+input[type="file"]:focus {
+    border-color: #007bff; /* Highlight border on focus */
+    outline: none;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    /*background: rgba(255, 255, 255, 0.9); /* White background for list items */
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+li button {
+    background-color: #dc3545; /* Bootstrap danger color for delete */
+}
+
+li button:hover {
+    background-color: #c82333; /* Darker shade for delete button on hover */
+}
+
+.message {
+    text-align: center;
+    color: red; /* Error message color */
+    margin-top: 20px;
+}
+
+
