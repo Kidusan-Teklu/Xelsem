@@ -11,7 +11,7 @@ const ReadBook = () => {
         // Fetch the book details using the book ID
         const fetchBook = async () => {
             try {
-                const response = await fetch(`read.php?id=${id}`);
+                const response = await fetch(`http://localhostxelsem/Xelsem/backend/getBooks.php?id=${id}`);
                 const result = await response.json();
 
                 if (result.success) {
@@ -42,5 +42,6 @@ const ReadBook = () => {
             <p>Category: {book.category}</p>
 
             <iframe
-                src={`../../uploads/${book.fileName}`} 
-                title={book.title}
+                src={`./uploads/${book.fileName}`} 
+                title={book.title}></iframe>
+</div>)

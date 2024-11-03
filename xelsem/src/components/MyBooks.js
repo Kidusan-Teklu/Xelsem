@@ -30,7 +30,7 @@ const MyBooks = () => {
 
     const fetchBooks = async () => {
         try {
-            const response = await fetch('http://localhost/xelsem/backend/getBooks.php');
+            const response = await fetch('http://localhost/xelsem/Xelsem/backend/getBooks.php');
             const result = await response.json();
             setBooks(result);
         } catch (error) {
@@ -53,7 +53,7 @@ const MyBooks = () => {
         }
 
         try {
-            const response = await fetch(isEditing ? `http://localhost/xelsem/backend/update.php?id=${isEditing}` : 'http://localhost/xelsem/backend/create.php', {
+            const response = await fetch(isEditing ? `http://localhost/xelsem/Xelsem/backend/update.php?id=${isEditing}` : 'http://localhost/xelsem/Xelsem/backend/create.php', {
                 method: 'POST',
                 body: formData,
             });
@@ -80,7 +80,7 @@ const MyBooks = () => {
 
     const deleteBook = async (id) => {
         try {
-            const response = await fetch(`http://localhost/xelsem/backend/delete.php?id=${id}`, {
+            const response = await fetch(`http://localhost/xelsem/Xelsem/backend/delete.php?id=${id}`, {
                 method: 'DELETE',
             });
 
