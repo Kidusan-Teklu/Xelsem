@@ -1,9 +1,11 @@
 /* src/components/Navbar.css */
 
 .navbar {
-    background-color: #444 !important;
-    padding: 10px 0 !important;
-    text-align: center !important;
+    background-color: rgba(44, 62, 80, 0.95) !important;  /* Semi-transparent */
+    backdrop-filter: blur(10px) !important;  /* Glass effect */
+    padding: 15px 0 !important;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;  /* Subtle border */
 }
 
 .navbar-list {
@@ -15,17 +17,48 @@
 }
 
 .navbar-item {
-    margin: 0 15px !important;
-    color:#780000 !important;
+    margin: 0 20px !important;
+    position: relative !important;  /* For hover effect */
 }
 
 .navbar-item a {
-    color: #fff !important;
-    text-decoration: none !important;
+    color: #e0f4ff !important;
     font-size: 1.1rem !important;
+    font-weight: 500 !important;
+    text-transform: uppercase !important;  /* Uppercase text */
+    letter-spacing: 1px !important;  /* Spacing between letters */
+    padding: 8px 16px !important;
+    border-radius: 20px !important;  /* Rounded corners */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;  /* Smooth transition */
 }
 
 .navbar-item a:hover {
-    text-decoration: underline !important;
-    background-color: #000 !important;
+    color: #fff !important;
+    background: linear-gradient(45deg, #3498db, #2c3e50) !important;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3) !important;
+    transform: translateY(-2px) !important;  /* Slight lift effect */
+}
+
+/* Active link style */
+.navbar-item a.active {
+    background: linear-gradient(45deg, #3498db, #2c3e50) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3) !important;
+}
+
+/* Add cool hover line effect */
+.navbar-item a::after {
+    content: '' !important;
+    position: absolute !important;
+    width: 0 !important;
+    height: 2px !important;
+    bottom: 0 !important;
+    left: 50% !important;
+    background: #3498db !important;
+    transition: all 0.3s ease !important;
+    transform: translateX(-50%) !important;
+}
+
+.navbar-item a:hover::after {
+    width: 70% !important;
 }

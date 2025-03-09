@@ -1,71 +1,70 @@
-# Xelsem
+# Getting Started with Create React App
 
-## Overview
-Xelsem is a web application known as **Xelsem Books** that allows users to upload, view, and read books online. This platform provides an easy-to-use interface for book lovers to access a diverse collection of books, share their own, and enjoy reading from anywhere.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Features
-- **User Registration and Authentication**: Users can create accounts and log in securely.
-- **Upload Books**: Registered users can upload their books in various formats (PDF, EPUB, etc.).
-- **Browse and Search**: Users can browse through a collection of books or search for specific titles or authors.
-- **Read Online**: Users can read books directly in their browser without the need for downloads.
-- **User Reviews and Ratings**: Users can leave reviews and ratings for books they have read.
-- **Responsive Design**: The application is designed to be responsive, ensuring a great experience on both desktop and mobile devices.
+## Available Scripts
 
-## Tech Stack
-- **Frontend**: React.js
-- **Backend**: PHP
-- **Database**: MySQL
-- **Authentication**: JSON Web Tokens (JWT) or session-based authentication
-- **File Storage**: Local storage or cloud storage (e.g., AWS S3)
+In the project directory, you can run:
 
-## Installation
+### `npm start`
 
-### Prerequisites
-- Node.js and npm installed on your machine.
-- PHP and a local server (like XAMPP or MAMP).
-- MySQL database.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-### Clone the Repository
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-git clone https://https://github.com/Kidusan-Teklu/Xelsem
-Frontend Setup
-Navigate to the frontend directory:
-Copy
-cd frontend
-Install dependencies:
-Copy
-npm install
-Backend Setup
-Navigate to the backend directory:
-Copy
-cd backend
-Set up your MySQL database and import the SQL schema provided in the database folder.
-Environment Variables
-Create a .env file in the backend directory and add the following variables:
+### `npm test`
 
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-DB_HOST="localhost"
-DB_USER="root"
-DB_PASS=""
-DB_NAME="xelsem"
+### `npm run build`
 
- ### Start the Application
-Start the backend server (e.g., using XAMPP for PHP).
-Start the React frontend:
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-npm start
-The application will be available at http://localhost:3000.
-Usage
-Register: Create a new account or log in if you already have one.
-Upload Books: Navigate to the upload section to add your books.
-Browse Books: Explore the library and find books to read.
-Read Online: Click on any book to start reading directly in your browser.
-Contributing
-Contributions are welcome! If you have suggestions or improvements, feel free to fork the repository and submit a pull request.
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-### License
-This project is licensed under the Apache-2.0 License - see the LICENSE file for details.
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### Acknowledgments
-Special Thanks to Sorardi plc for providig enternship position at there organization and for making me Work on this Project.
-Thanks to the contributors and the open-source community for their support and resources.
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

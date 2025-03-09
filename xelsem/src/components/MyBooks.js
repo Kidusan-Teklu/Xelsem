@@ -1,164 +1,215 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './MyBooks.css';
 
+const API_URL = 'http://localhost:5000'; // Make sure this matches your backend port
+
 const MyBooks = () => {
-    const backgroundImages = [
-        './b-g1.jfif',
-        './b-g2.jfif',
-        './b-g3.jfif',
-        './b-g4.jfif',
-        './b-g5.jfif'
-    ];
-
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [books, setBooks] = useState([]);
-    const [newBook, setNewBook] = useState({ title: '', author: '', category: '' });
-    const [file, setFile] = useState(null);
-    const [message, setMessage] = useState('');
-    const [isUploading, setIsUploading] = useState(false);
-    const [isEditing, setIsEditing] = useState(null);
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % backgroundImages.length);
-        }, 5000);
-
-        return () => clearInterval(interval);
-    }, [backgroundImages.length]);
-
-    const fetchBooks = async () => {
-        try {
-            const response = await fetch('http://localhost/xelsem/Xelsem/backend/getBooks.php');
-            const result = await response.json();
-            setBooks(result);
-        } catch (error) {
-            setMessage('Error fetching books.');
-        }
-    };
+    const [showUploadForm, setShowUploadForm] = useState(false);
+    const [formData, setFormData] = useState({
+        title: '',
+        author: '',
+        category: '',
+        file: null
+    });
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         fetchBooks();
     }, []);
 
-    const addBook = async (e) => {
+    const fetchBooks = async () => {
+        try {
+            const response = await fetch(`${API_URL}/api/books`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch books');
+            }
+            const data = await response.json();
+            setBooks(data);
+        } catch (error) {
+            console.error('Error fetching books:', error);
+            setError('Failed to load books');
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const handleFileChange = (e) => {
+        setFormData(prev => ({
+            ...prev,
+            file: e.target.files[0]
+        }));
+    };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('title', newBook.title);
-        formData.append('author', newBook.author);
-        formData.append('category', newBook.category);
-        if (file) {
-            formData.append('file', file);
-        }
+        setError(null);
 
         try {
-            const response = await fetch(isEditing ? `http://localhost/xelsem/Xelsem/backend/update.php?id=${isEditing}` : 'http://localhost/xelsem/Xelsem/backend/create.php', {
+            const formDataToSend = new FormData();
+            formDataToSend.append('title', formData.title);
+            formDataToSend.append('author', formData.author);
+            formDataToSend.append('category', formData.category);
+            formDataToSend.append('file', formData.file);
+
+            const response = await fetch(`${API_URL}/api/books`, {
                 method: 'POST',
-                body: formData,
+                body: formDataToSend,
+                // Remove the Content-Type header - FormData will set it automatically
+                headers: {
+                    'Accept': 'application/json',
+                },
             });
 
-            const result = await response.text();
-            setMessage(result);
-            alert(result);
-            setNewBook({ title: '', author: '', category: '' });
-            setFile(null);
-            setIsUploading(false);
-            setIsEditing(null);
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.error || 'Upload failed');
+            }
+
+            // Reset form
+            setFormData({
+                title: '',
+                author: '',
+                category: '',
+                file: null
+            });
+            
+            // Reset file input
+            const fileInput = document.querySelector('input[type="file"]');
+            if (fileInput) {
+                fileInput.value = '';
+            }
+
+            setShowUploadForm(false);
+            // Refresh book list
             fetchBooks();
+            
+            // Show success message
+            alert('Book uploaded successfully!');
+
         } catch (error) {
-            setMessage('Error uploading the book.');
-            alert('Error uploading the book.');
+            console.error('Error uploading book:', error);
+            setError(error.message || 'Failed to upload book');
+            alert(error.message || 'Failed to upload book');
         }
     };
 
-    const editBook = (book) => {
-        setNewBook({ title: book.title, author: book.author, category: book.category });
-        setIsUploading(true);
-        setIsEditing(book.id);
-    };
-
-    const deleteBook = async (id) => {
-        try {
-            const response = await fetch(`http://localhost/xelsem/Xelsem/backend/delete.php?id=${id}`, {
-                method: 'DELETE',
-            });
-
-            const result = await response.text();
-            setMessage(result);
-            alert(result);
-            fetchBooks();
-        } catch (error) {
-            setMessage('Error deleting the book.');
-            alert('Error deleting the book.');
-        }
-    };
+    if (loading) return <div className="loading">Loading books...</div>;
 
     return (
-        <div>
+        <div className="mybooks-container">
             <h2>My Books</h2>
-            <button 
-                style={{ fontSize: '20px', padding: '10px 20px', marginBottom: '20px' }} 
-                onClick={() => {
-                    setIsUploading(true);
-                    setIsEditing(null);
-                }}
-            >
-                {isEditing ? 'Edit Book' : 'Upload New Book'}
-            </button>
+            
+            {error && <div className="error-message">{error}</div>}
+            
+            <div className="upload-section">
+                <button 
+                    className="upload-button"
+                    onClick={() => setShowUploadForm(!showUploadForm)}
+                >
+                    {showUploadForm ? 'Cancel Upload' : 'Upload New Book'}
+                </button>
 
-            {isUploading ? (
-                <form onSubmit={addBook}>
-                    <input
-                        type="text"
-                        placeholder="Title"
-                        value={newBook.title}
-                        onChange={(e) => setNewBook({ ...newBook, title: e.target.value })}
-                        required
-                    />
-                    <input
-                        type="text"
-                        placeholder="Author"
-                        value={newBook.author}
-                        onChange={(e) => setNewBook({ ...newBook, author: e.target.value })}
-                        required
-                    />
-                    <input
-                        type="text"
-                        placeholder="Category"
-                        value={newBook.category}
-                        onChange={(e) => setNewBook({ ...newBook, category: e.target.value })}
-                        required
-                    />
-                    {!isEditing && (
-                        <input
-                            type="file"
-                            onChange={(e) => setFile(e.target.files[0])}
-                            accept=".pdf, .epub, .mobi, .doc, .docx, .txt"
-                            required
-                        />
-                    )}
-                    <button type="submit">{isEditing ? 'Update Book' : 'Add Book'}</button>
-                    <button type="button" onClick={() => { setIsUploading(false); setIsEditing(null); }}>
-                        Cancel
-                    </button>
-                </form>
-            ) : (
-                <div>
-                    <h3>Uploaded Books</h3>
-                    <ul>
-                        {books.map((book) => (
-                            <li key={book.id}>
-                                <strong>{book.title}</strong> by {book.author} (Category: {book.category})
-                                <button onClick={() => editBook(book)}>Edit</button>
-                                <button onClick={() => deleteBook(book.id)}>Delete</button>
-                                <button onClick={() => navigate(`/read/${book.id}`)}>Read</button>
-                            </li>
-                        ))}
-                    </ul>
+                {showUploadForm && (
+                    <form onSubmit={handleSubmit} className="upload-form">
+                        <div className="form-group">
+                            <label htmlFor="title">Title:</label>
+                            <input
+                                type="text"
+                                id="title"
+                                name="title"
+                                value={formData.title}
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="author">Author:</label>
+                            <input
+                                type="text"
+                                id="author"
+                                name="author"
+                                value={formData.author}
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="category">Category:</label>
+                            <input
+                                type="text"
+                                id="category"
+                                name="category"
+                                value={formData.category}
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </div>
+
+                        <div className="form-group">
+                            <label htmlFor="file">Book File (PDF):</label>
+                            <input
+                                type="file"
+                                id="file"
+                                name="file"
+                                accept=".pdf,.epub,.mobi,.doc,.docx,.txt"
+                                onChange={handleFileChange}
+                                required
+                            />
+                        </div>
+
+                        <button type="submit" className="submit-button">
+                            Upload Book
+                        </button>
+                    </form>
+                )}
+            </div>
+
+            <div className="books-grid">
+                {books.map((book) => (
+                    <div key={book._id} className="book-card">
+                        <div className="book-info">
+                            <h3>{book.title}</h3>
+                            <p>Author: {book.author}</p>
+                            <p>Category: {book.category}</p>
+                        </div>
+                        <div className="book-actions">
+                            <Link 
+                                to={`/read/${book._id}`}
+                                state={{ book: book }}
+                                className="read-button"
+                            >
+                                Read Now
+                            </Link>
+                            <a 
+                                href={`${API_URL}/api/books/${book._id}/download`}
+                                className="download-button"
+                            >
+                                Download
+                            </a>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            {books.length === 0 && !showUploadForm && (
+                <div className="no-books">
+                    <p className="upload-text">No books uploaded yet</p>
                 </div>
             )}
-            {message && <p>{message}</p>}
         </div>
     );
 };

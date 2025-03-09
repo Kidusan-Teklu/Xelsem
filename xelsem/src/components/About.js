@@ -1,5 +1,13 @@
 // src/components/About.js
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+    faFacebookF, 
+    faTwitter, 
+    faInstagram, 
+    faLinkedinIn, 
+    faGithub 
+} from '@fortawesome/free-brands-svg-icons';
 import './About.css'; // Importing the CSS file for the About component
 
 const About = () => {
@@ -15,6 +23,54 @@ const About = () => {
                 Whether you're a casual reader or a book enthusiast, XelsemBooks has something for everyone. 
                 Join us today and dive into the world of books!
             </p>
+
+            <div className="social-media-container">
+                <a 
+                    href="https://web.facebook.com/kedusan.teklu " 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="social-icon facebook"
+                >
+                    <FontAwesomeIcon icon={faFacebookF} />
+                </a>
+                
+                <a 
+                    href="https://x.com/KidusanTek71828 
+" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="social-icon twitter"
+                >
+                    <FontAwesomeIcon icon={faTwitter} />
+                </a>
+                
+                <a 
+                    href="https://www.instagram.com/kidus_dt/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="social-icon instagram"
+                >
+                    <FontAwesomeIcon icon={faInstagram} />
+                </a>
+                
+                <a 
+                    href="https://www.linkedin.com/in/kidusan-teklu/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="social-icon linkedin"
+                >
+                    <FontAwesomeIcon icon={faLinkedinIn} />
+                </a>
+                
+                <a 
+                    href="https://github.com/Kidusan-Teklu/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="social-icon github"
+                >
+                    <FontAwesomeIcon icon={faGithub} />
+                </a>
+            </div>
         </div>
     );
 };

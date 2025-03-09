@@ -1,11 +1,92 @@
 /* src/components/Footer.css */
 
 .footer {
-    background-color: #333;
-    padding: 10px;
-    text-align: center;
-    color: #fff;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
+    background: rgba(44, 62, 80, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 20px 0;
+    color: #e0f4ff;
+    position: relative;
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+}
+
+.social-media-footer {
+    display: flex;
+    gap: 20px;
+}
+
+/* Footer social icons */
+.footer .social-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    color: #ffffff;
+    font-size: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.footer .social-icon:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+/* Individual social media colors on hover */
+.footer .social-icon.facebook:hover {
+    background: #1877f2;
+    color: white;
+}
+
+.footer .social-icon.twitter:hover {
+    background: #1da1f2;
+    color: white;
+}
+
+.footer .social-icon.instagram:hover {
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color: white;
+}
+
+.footer .social-icon.linkedin:hover {
+    background: #0077b5;
+    color: white;
+}
+
+.footer .social-icon.github:hover {
+    background: #333;
+    color: white;
+}
+
+/* Copyright text */
+.footer p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .social-media-footer {
+        order: 2;
+    }
 }

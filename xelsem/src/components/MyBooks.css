@@ -1,91 +1,133 @@
-/* src/components/MyBooks.css */
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0; /* Light background for contrast */
+.mybooks-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 80vh;
 }
 
-h2 {
+.mybooks-container h2 {
+    color: #e0f4ff;
     text-align: center;
-    color: #333;
-    margin-top: 20px;
+    margin-bottom: 2rem;
+    font-size: 2rem;
 }
 
-h3 {
-    margin-top: 20px;
-    color: #555;
-}
-
-button {
-    cursor: pointer;
-    background-color: #007bff; /* Bootstrap primary color */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 15px;
-    margin: 5px;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #0056b3; /* Darker shade on hover */
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-    background: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
-    padding: 20px;
+.no-books {
+    text-align: center;
+    padding: 3rem;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+    max-width: 600px;
 }
 
-input[type="text"],
-input[type="file"] {
-    width: 80%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
+.upload-text {
+    color: #3498db;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.upload-section {
+    margin-top: 2rem;
+}
+
+.upload-button {
+    background: #3498db;
+    color: white;
+    padding: 12px 24px;
     border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
 }
 
-input[type="text"]:focus,
-input[type="file"]:focus {
-    border-color: #007bff; /* Highlight border on focus */
-    outline: none;
+.upload-button:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
 }
 
-li {
-    /*background: rgba(255, 255, 255, 0.9); /* White background for list items */
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 5px;
+.book-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+}
+
+.book-info {
+    margin-bottom: 1.5rem;
+}
+
+.book-info h3 {
+    color: #e0f4ff;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.book-info p {
+    color: #e0f4ff;
+    margin: 0.5rem 0;
+}
+
+.book-actions {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 1rem;
+    justify-content: center;
 }
 
-li button {
-    background-color: #dc3545; /* Bootstrap danger color for delete */
+.read-button,
+.download-button {
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
-li button:hover {
-    background-color: #c82333; /* Darker shade for delete button on hover */
+.read-button {
+    background: #3498db;
+    color: white;
 }
 
-.message {
-    text-align: center;
-    color: red; /* Error message color */
-    margin-top: 20px;
+.download-button {
+    background: #2ecc71;
+    color: white;
 }
 
+.read-button:hover,
+.download-button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
 
+@media (max-width: 768px) {
+    .books-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .book-card {
+        margin: 1rem;
+    }
+
+    .book-actions {
+        flex-direction: column;
+    }
+
+    .read-button,
+    .download-button {
+        width: 100%;
+        text-align: center;
+        margin: 0.5rem 0;
+    }
+}

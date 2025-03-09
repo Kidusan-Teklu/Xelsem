@@ -1,47 +1,88 @@
 // src/components/ReadBook.js
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation, Link } from 'react-router-dom';
+import './BookReader.css';
 
-const ReadBook = () => {
-    const { id } = useParams(); // Get the book ID from the URL
-    const [book, setBook] = useState(null);
-    const [error, setError] = useState('');
+const BookReader = () => {
+    const { bookId } = useParams();
+    const location = useLocation();
+    const bookData = location.state?.book;
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pdfUrl, setPdfUrl] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
-        // Fetch the book details using the book ID
-        const fetchBook = async () => {
-            try {
-                const response = await fetch(`http://localhostxelsem/Xelsem/backend/getBooks.php?id=${id}`);
-                const result = await response.json();
+        if (bookData?.fileUrl) {
+            setPdfUrl(bookData.fileUrl);
+            setLoading(false);
+        } else {
+            setError('Book data not found');
+            setLoading(false);
+        }
+    }, [bookData]);
 
-                if (result.success) {
-                    setBook(result.data);
-                } else {
-                    setError('Book not found.');
-                }
-            } catch (error) {
-                setError('Error fetching the book.');
-            }
-        };
-
-        fetchBook();
-    }, [id]);
-
-    if (error) {
-        return <div>{error}</div>;
-    }
-
-    if (!book) {
-        return <div>Loading...</div>;
-    }
+    if (loading) return <div className="reader-loading">Loading book...</div>;
+    if (error) return <div className="reader-error">{error}</div>;
 
     return (
-        <div>
-            <h2>{book.title}</h2>
-            <h4>by {book.author}</h4>
-            <p>Category: {book.category}</p>
+        <div className="book-reader">
+            <div className="reader-header">
+                <div className="reader-nav">
+                    <Link to="/mybooks" className="back-button">
+                        ← Back to My Books
+                    </Link>
+                    <h2>{bookData?.title}</h2>
+                </div>
+                <div className="reader-info">
+                    <p>Author: {bookData?.author}</p>
+                    <p>Description: {bookData?.description}</p>
+                </div>
+            </div>
 
-            <iframe
-                src={`./uploads/${book.fileName}`} 
-                title={book.title}></iframe>
-</div>)
+            <div className="reader-content">
+                {pdfUrl ? (
+                    <iframe
+                        src={`${pdfUrl}#toolbar=0`}
+                        title="PDF Viewer"
+                        className="pdf-viewer"
+                    />
+                ) : (
+                    <div className="reader-placeholder">
+                        <p>No preview available</p>
+                        <a 
+                            href={bookData?.fileUrl} 
+                            download 
+                            className="download-button"
+                        >
+                            Download to Read
+                        </a>
+                    </div>
+                )}
+            </div>
+
+            <div className="reader-controls">
+                <div className="control-buttons">
+                    <button 
+                        className="nav-button prev"
+                        onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                        disabled={currentPage === 1}
+                    >
+                        Previous Page
+                    </button>
+                    <span className="page-info">
+                        Page {currentPage}
+                    </span>
+                    <button 
+                        className="nav-button next"
+                        onClick={() => setCurrentPage(prev => prev + 1)}
+                    >
+                        Next Page
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default BookReader;

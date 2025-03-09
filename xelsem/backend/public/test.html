@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+    <style>
+        body { padding: 20px; font-family: Arial, sans-serif; }
+        button { margin: 10px; padding: 10px; }
+        pre { background: #f0f0f0; padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>API Test</h1>
+    
+    <button onclick="testAPI('/api/test')">Test Basic API</button>
+    <button onclick="testAPI('/api/books/test')">Test Books API</button>
+    
+    <h2>Result:</h2>
+    <pre id="result">Click a button to test the API</pre>
+
+    <script>
+        async function testAPI(endpoint) {
+            const resultElement = document.getElementById('result');
+            try {
+                resultElement.textContent = 'Loading...';
+                const response = await fetch(endpoint);
+                const data = await response.json();
+                resultElement.textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                resultElement.textContent = 'Error: ' + error.message;
+                console.error('API Error:', error);
+            }
+        }
+    </script>
+</body>
+</html> 

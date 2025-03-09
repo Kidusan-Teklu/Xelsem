@@ -7,6 +7,8 @@ import MainPage from './components/MainPage';
 import About from './components/About';
 import Contact from './components/Contact';
 import MyBooks from './components/MyBooks';
+import Read from './components/Read';
+import BookReader from './components/BookReader';
 
 function App() {
   // Array of background images
@@ -38,6 +40,8 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/mybooks" element={<MyBooks />} />
+            <Route path="/read/:id" element={<Read />} />
+            <Route path="/read/:bookId" element={<BookReader />} />
           </Routes>
         </main>
         <Footer /> {/* The Footer component */}

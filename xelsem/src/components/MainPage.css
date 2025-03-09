@@ -2,10 +2,7 @@
 
 /* Background image styling */
 .main-page {
-    background-image: url('./bg1.jfif'); 
-    background-position: center;
-    background-repeat: no-repeat; /* Prevents the background from repeating */
-    background-size: cover; /* Ensures the background image covers the entire container */
+    background: linear-gradient(135deg, #789dc2, #3498db, #e0f4ff);
     color: #fff;
     padding: 50px;
     text-align: center;
@@ -13,6 +10,26 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add animated background effect */
+.main-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(52, 152, 219, 0.2) 25%, transparent 25%);
+    background-size: 3em 3em;
+    animation: moveBackground 20s linear infinite;
+}
+
+@keyframes moveBackground {
+    0% { background-position: 0 0; }
+    100% { background-position: 100% 100%; }
 }
 
 /* Logo styling */
@@ -20,22 +37,41 @@
     width: 150px;
     height: auto;
     margin-bottom: 20px;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+}
+
+.logo:hover {
+    transform: scale(1.1);
 }
 
 /* Heading styles */
 .main-page h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    background: linear-gradient(45deg, #fff, #e0f4ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: titleGlow 2s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+    0%, 100% { text-shadow: 0 0 20px rgba(52, 152, 219, 0.5); }
+    50% { text-shadow: 0 0 30px rgba(52, 152, 219, 0.8); }
 }
 
 /* Paragraph styling */
 .main-page p {
     font-size: 1.2rem;
-    line-height: 1.6;
+    line-height: 1.8;
     max-width: 800px;
     margin: 0 auto 30px auto;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 /* Subheading styles */
@@ -49,28 +85,70 @@
 .main-page ul {
     list-style-type: none;
     padding: 0;
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
 }
 
 .main-page ul li {
     font-size: 1.1rem;
     margin-bottom: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    border-radius: 5px;
+    background: rgba(44, 62, 80, 0.7);
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.main-page ul li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background: rgba(52, 152, 219, 0.7);
 }
 
 /* Quote styling */
 .main-page blockquote {
     font-style: italic;
     font-size: 1.5rem;
-    margin: 30px auto;
-    max-width: 600px;
+    margin: 40px auto;
+    max-width: 800px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-    border-left: 4px solid #ddd;
-    padding-left: 15px;
-    color: #ffd700;
+    border-left: 4px solid #3498db;
+    padding: 20px 40px;
+    color: #e0f4ff;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0 15px 15px 0;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+.main-page blockquote:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Button styling */
+.main-page button {
+    background: linear-gradient(45deg, #3498db, #2c3e50);
+    border: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.main-page button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
+    background: linear-gradient(45deg, #2c3e50, #3498db);
 }
 
 /* Responsive design */
@@ -85,9 +163,15 @@
 
     .main-page p {
         font-size: 1rem;
+        padding: 15px;
     }
 
     .main-page blockquote {
         font-size: 1.2rem;
+        padding: 15px 25px;
+    }
+
+    .main-page ul {
+        grid-template-columns: 1fr;
     }
 }
